@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name='viewport' content='width=device-width'/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	
+
+
+<style>
+	body { background-color: #C8C8C8; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
+</style> 
+
+<img src="logo-universite-toulon.png" style="width: 200px;" />
+
+<table>
+	<tr>
+		<title> Analyz'Air </title>
+<br>
+<h1><center><b>Analyz'Air</b></h1><br></center><br>
+
+
+<td>
+<img src="airquality.png" align=left style="width: 200px;" />
+<br><br><br><br><br><br><br><br><br>
+<img src="dht.png" align=left style="width: 200px;" />
+<br><br><br><br><br><br><br><br><br>
+<img src="dustsensor.png" align=left style="width: 200px;" />
+</td>
+
+<td>
+<center>Temps d'utilisation actuel : <span id="uptime">Error Connection</span> minutes</center><br><br>
+<center>Température : <span id="temp">Error Connection</span>°C <b><span id="avisT">Inconnu</span></center></b><br><br>
+<center>Humidité : <span id="humid">Error Connection</span>% <b><span id="avisH">Inconnu</span></b></center><br><br>
+<center>Capteur de qualité d'air générale : <span id="Qair">Error Connection</span>	<b><span id="avisQ">Inconnu</span></b></center><br><br>
+<center>Concentration de particules fines : <span id="Part">Error Connection</span> <b><span id="avisP">Inconnu</span></b></center><br><br>
+
+
+<h4><center><b>Critères d'analyse :</b></h4></center>
+
+<h5><center>Température : CORRECT si inférieure à 30° - DANGER sinon <br>
+Humidité : CORRECT si inférieure à 65% - DANGER sinon <br>
+Qualité d'air générale : CORRECTE si inférieur à 90 - DANGER sinon <br>
+Concentration en particules fines : CORRECTE si inférieur à 800 - DANGER sinon <br>
+</center></h5><br>
+
+ 
+<h3><center>Développé par Perronnet, Boulanger, Fata<br>Université de Toulon</h3></center>
+<h6><center><a href="https://github.com/SkyNoxDEV/ProjetTUT">Code open source</a></center></h6>
+</td>
+</tr>
+
+</table>
+</body>
+
+<script>
+	
+////////////FONCTION MAJ UPTIME/////////////////////////////////
+
+function getUptime() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       // l'élement uptime prend la valeur de la réponse du code Arduino
+      document.getElementById("uptime").innerHTML = this.responseText; 
+    }
+  };
+  xhttp.open("GET", "getUptime", true);
+  xhttp.send();
+}
+
+////////////FONCTION MAJ Temperature/////////////////////////////////
+
+function getTemp(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("temp").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "getTemp", true);
+	xhttp.send();
+}
+
+////////////FONCTION MAJ Avis Temperature/////////////////////////////////
+
+function avisTemp(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("avisT").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "avisTemp", true);
+	xhttp.send();
+}
+
+////////////FONCTION MAJ Humidite/////////////////////////////////
+
+function getHumid(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("humid").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "getHumid", true);
+	xhttp.send();
+}
+
+////////////FONCTION MAJ Avis Humidite/////////////////////////////////
+
+function avisHumi(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("avisH").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "avisHumi", true);
+	xhttp.send();
+}
+
+////////////FONCTION MAJ Qualite Air/////////////////////////////////
+
+function getQair(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("Qair").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "getQair", true);
+	xhttp.send();
+}
+
+////////////FONCTION MAJ Avis Qualite Air/////////////////////////////////
+
+function avisQair(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("avisQ").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "avisQair", true);
+	xhttp.send();
+}
+
+////////////FONCTION MAJ Particules fines/////////////////////////////////
+
+function getPart() {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("Part").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "getPart", true);
+	xhttp.send();
+}
+
+////////////FONCTION MAJ Avis Particules Fines/////////////////////////////////
+
+function avisPart(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			document.getElementById("avisP").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "avisPart", true);
+	xhttp.send();
+}
+
+
+// APPELLE FONCTIONS TOUTES LES 10s
+setInterval(function() {
+  getTemp();
+  avisTemp();
+  getHumid();
+  avisHumi();
+  getQair();
+  avisQair();
+  getPart();
+  avisPart();
+  getUptime();
+}, 10000); 
+
+
+</script>
+
+</html>
